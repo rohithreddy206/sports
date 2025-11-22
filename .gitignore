@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+
+# FastAPI
+*.log
+
+# Llama.cpp model files (very large)
+*.gguf
+models/
+llama.cpp/models/
+
+# FAISS index files
+*.faiss
+
+# Embedding model cache
+sentence_transformers/
+huggingface/
+
+# Local environment
+.env
+.DS_Store
+
+# Build folders
+build/
+dist/
+
+venv/
+.env/
+__pycache__/
+*.pyc
+

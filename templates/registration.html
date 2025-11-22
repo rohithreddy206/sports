@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Sports Club</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        /* ...existing styles... */
+        
+        /* Email verification styles */
+        .email-verify-container {
+            position: relative;
+        }
+        .email-verify-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .email-verify-buttons button {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+        .btn-verify-email-otp {
+            background: #10b981;
+        }
+        .btn-verify-email-otp:hover {
+            background: #059669;
+        }
+        .email-verified-badge {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .email-verified-badge.show {
+            display: flex;
+        }
+        .email-otp-input {
+            display: none;
+            margin-top: 8px;
+        }
+        .email-otp-input.show {
+            display: block;
+        }
+        .email-verify-error {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+        
+        /* NEW: Phone verification styles */
+        .phone-verify-container {
+            position: relative;
+        }
+        .phone-verify-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+        }
+        .phone-verify-buttons button {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+        .btn-verify-otp {
+            background: #10b981;
+        }
+        .btn-verify-otp:hover {
+            background: #059669;
+        }
+        .phone-verified-badge {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            color: #10b981;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .phone-verified-badge.show {
+            display: flex;
+        }
+        .phone-verified-badge .check-icon {
+            font-size: 1.2rem;
+        }
+        .otp-verify-input {
+            display: none;
+            margin-top: 8px;
+        }
+        .otp-verify-input.show {
+            display: block;
+        }
+        .phone-verify-error {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>🏆 Sports Club</h1>
+                <p>Create your account</p>
+            </div>
+            <form id="registrationForm" novalidate>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="first_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" required>
+                    </div>
+                </div>
+                
+                <!-- Email with Verification -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="email-verify-container">
+                        <input type="email" id="email" name="email" required>
+                        
+                        <!-- NEW: Email availability error -->
+                        <div id="email-error" style="color: #ef4444; font-size: 0.85rem; margin-top: 5px; display: none;"></div>
+                        
+                        <!-- Send Email OTP Button -->
+                        <div class="email-verify-buttons">
+                            <button type="button" id="sendEmailOtpBtn" class="btn btn-send-otp">
+                                Send Email OTP
+                            </button>
+                        </div>
+                        
+                        <!-- Email OTP Input (hidden initially) -->
+                        <div id="emailOtpInput" class="email-otp-input">
+                            <input type="text" id="emailOtpCode" placeholder="Enter 6-digit OTP" maxlength="6" autocomplete="off">
+                            <button type="button" id="verifyEmailOtpBtn" class="btn btn-verify-email-otp">
+                                Verify Email OTP
+                            </button>
+                        </div>
+                        
+                        <!-- Email Verified Badge (hidden initially) -->
+                        <div id="emailVerifiedBadge" class="email-verified-badge">
+                            <span class="check-icon">✓</span>
+                            <span>Email verified successfully</span>
+                        </div>
+                        
+                        <!-- Error Message -->
+                        <div id="emailVerifyError" class="email-verify-error"></div>
+                    </div>
+                </div>
+                
+                <!-- Phone Number with Verification -->
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <div class="phone-verify-container">
+                        <input type="tel" id="phone" name="phone" placeholder="+1234567890" required>
+                        
+                        <!-- Send OTP Button -->
+                        <div class="phone-verify-buttons">
+                            <button type="button" id="sendPhoneOtpBtn" class="btn btn-send-otp">
+                                Send Phone OTP
+                            </button>
+                        </div>
+                        
+                        <!-- OTP Input (hidden initially) -->
+                        <div id="otpVerifyInput" class="otp-verify-input">
+                            <input type="text" id="phoneOtpCode" placeholder="Enter 6-digit OTP" maxlength="6" autocomplete="off">
+                            <button type="button" id="verifyPhoneOtpBtn" class="btn btn-verify-otp">
+                                Verify Phone OTP
+                            </button>
+                        </div>
+                        
+                        <!-- Verified Badge (hidden initially) -->
+                        <div id="phoneVerifiedBadge" class="phone-verified-badge">
+                            <span class="check-icon">✓</span>
+                            <span>Phone verified successfully</span>
+                        </div>
+                        
+                        <!-- Error Message -->
+                        <div id="phoneVerifyError" class="phone-verify-error"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required minlength="6">
+                </div>
+                <div id="regError" class="error-message"></div>
+                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>
+                    <span id="btnText">Create Account</span>
+                    <span id="btnSpinner" style="display: none;">Registering...</span>
+                </button>
+                <p style="font-size: 0.85rem; color: #6b7280; text-align: center; margin-top: 10px;">
+                    ⚠️ Please verify both email and phone before registering
+                </p>
+            </form>
+            <div class="auth-footer">
+                Already have an account? <a href="/login">Login here</a>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/register.js"></script>
+</body>
+</html>

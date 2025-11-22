@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Sports Club</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">🏆 Sports Club</div>
+            <div class="nav-links">
+                <span class="user-info">{{ first_name }} {{ last_name }}</span>
+                <a href="/logout" class="btn btn-logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="dashboard-container">
+        <div class="welcome-section">
+            <h1>Welcome, {{ first_name }}! 👋</h1>
+            <p>Explore our sports facilities and programs</p>
+        </div>
+        
+        <div class="sports-grid">
+            <div class="sport-card">
+                <div class="sport-icon">⚽</div>
+                <h3>Football</h3>
+                <p>Team coordination, endurance, and strategic gameplay</p>
+                <div class="sport-stats">
+                    <span>🏅 12 Members</span>
+                    <span>📅 Mon, Wed, Fri</span>
+                </div>
+            </div>
+            
+            <div class="sport-card">
+                <div class="sport-icon">🏀</div>
+                <h3>Basketball</h3>
+                <p>Agility, teamwork, and precision passing skills</p>
+                <div class="sport-stats">
+                    <span>🏅 18 Members</span>
+                    <span>📅 Tue, Thu, Sat</span>
+                </div>
+            </div>
+            
+            <div class="sport-card">
+                <div class="sport-icon">🎾</div>
+                <h3>Tennis</h3>
+                <p>Speed, focus, and individual performance excellence</p>
+                <div class="sport-stats">
+                    <span>🏅 8 Members</span>
+                    <span>📅 Daily</span>
+                </div>
+            </div>
+            
+            <div class="sport-card">
+                <div class="sport-icon">🏊</div>
+                <h3>Swimming</h3>
+                <p>Strength, breath control, and mental discipline</p>
+                <div class="sport-stats">
+                    <span>🏅 15 Members</span>
+                    <span>📅 Daily</span>
+                </div>
+            </div>
+            
+            <div class="sport-card">
+                <div class="sport-icon">🏐</div>
+                <h3>Volleyball</h3>
+                <p>Communication, reflexes, and team synchronization</p>
+                <div class="sport-stats">
+                    <span>🏅 14 Members</span>
+                    <span>📅 Mon, Wed, Fri</span>
+                </div>
+            </div>
+            
+            <div class="sport-card">
+                <div class="sport-icon">🏋️</div>
+                <h3>Fitness</h3>
+                <p>Strength training, cardio, and wellness programs</p>
+                <div class="sport-stats">
+                    <span>🏅 25 Members</span>
+                    <span>📅 Daily</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

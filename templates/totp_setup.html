@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup 2FA - Sports Club</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .setup-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .qr-container {
+            text-align: center;
+            padding: 30px;
+            background: #f3f4f6;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .qr-container img {
+            max-width: 300px;
+            border: 5px solid white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .secret-code {
+            background: #334155;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-align: center;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+        .setup-steps {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .setup-steps ol {
+            padding-left: 20px;
+        }
+        .setup-steps li {
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        .icon-large {
+            font-size: 3rem;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card setup-container">
+            <div class="auth-header">
+                <div class="icon-large">🔐</div>
+                <h1>Setup Two-Factor Authentication</h1>
+                <p>Secure your account with Google Authenticator</p>
+            </div>
+
+            <div class="setup-steps">
+                <h3>📱 How to setup:</h3>
+                <ol>
+                    <li><strong>Download</strong> Google Authenticator app:
+                        <ul>
+                            <li>iOS: App Store</li>
+                            <li>Android: Play Store</li>
+                        </ul>
+                    </li>
+                    <li><strong>Open</strong> the app and tap <strong>"+"</strong> or <strong>"Add account"</strong></li>
+                    <li><strong>Scan</strong> the QR code below</li>
+                    <li>Or <strong>manually enter</strong> the secret code</li>
+                </ol>
+            </div>
+
+            <div class="qr-container">
+                <h3>Scan this QR Code:</h3>
+                <img src="{{ qr_code }}" alt="TOTP QR Code">
+            </div>
+
+            <div>
+                <h3 style="text-align: center;">Or enter this code manually:</h3>
+                <div class="secret-code">{{ secret }}</div>
+                <p style="text-align: center; color: #6b7280; font-size: 0.9rem;">
+                    Account: <strong>{{ email }}</strong><br>
+                    Issuer: <strong>Sports Club</strong>
+                </p>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <button onclick="completeSetup()" class="btn btn-primary" style="width: 100%;">
+                    I've Scanned the Code - Continue to Login
+                </button>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px; padding: 15px; background: #fef3c7; border-radius: 8px;">
+                <strong>⚠️ Important:</strong> Save this secret code in a safe place. You'll need it if you lose your phone.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function completeSetup() {
+            try {
+                const response = await fetch("/totp-setup/complete", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" }
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert("✅ 2FA setup complete! Please login with your credentials.");
+                    window.location.href = result.redirect;
+                } else {
+                    alert("Error: " + result.error);
+                }
+            } catch (error) {
+                console.error("Setup error:", error);
+                alert("Network error. Redirecting to login...");
+                window.location.href = "/login";
+            }
+        }
+    </script>
+</body>
+</html>
