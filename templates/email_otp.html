@@ -1,79 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Email - Sports Club</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <style>
-        .otp-input {
-            font-size: 24px;
-            letter-spacing: 10px;
-            text-align: center;
-            font-weight: bold;
-        }
-        .resend-link {
-            text-align: center;
-            margin-top: 20px;
-            color: #6b7280;
-            font-size: 0.9rem;
-        }
-        .resend-link a {
-            color: #4f46e5;
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .resend-link a:hover {
-            text-decoration: underline;
-        }
-        .success-message {
-            color: #10b981;
-            background: rgba(16, 185, 129, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <h1>📧 Verify Your Email</h1>
-                <p>We've sent a 6-digit code to<br><strong>{{ email }}</strong></p>
+{% extends "base.html" %}
+
+{% block title %}Verify Email - Sports Club{% endblock %}
+
+{% block extra_styles %}
+<style>
+    .otp-input {
+        font-size: 24px;
+        letter-spacing: 10px;
+        text-align: center;
+        font-weight: bold;
+    }
+    .resend-link {
+        text-align: center;
+        margin-top: 20px;
+        color: #6b7280;
+        font-size: 0.9rem;
+    }
+    .resend-link a {
+        color: #4f46e5;
+        text-decoration: none;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .resend-link a:hover {
+        text-decoration: underline;
+    }
+    .success-message {
+        color: #10b981;
+        background: rgba(16, 185, 129, 0.1);
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>📧 Verify Your Email</h1>
+            <p>We've sent a 6-digit code to<br><strong>{{ email }}</strong></p>
+        </div>
+        <form id="otpForm" novalidate>
+            <div class="form-group">
+                <label for="otp">Enter OTP Code</label>
+                <input 
+                    type="text" 
+                    id="otp" 
+                    name="otp" 
+                    class="otp-input" 
+                    maxlength="6" 
+                    pattern="[0-9]{6}" 
+                    placeholder="000000"
+                    required
+                    autocomplete="off">
             </div>
-            <form id="otpForm" novalidate>
-                <div class="form-group">
-                    <label for="otp">Enter OTP Code</label>
-                    <input 
-                        type="text" 
-                        id="otp" 
-                        name="otp" 
-                        class="otp-input" 
-                        maxlength="6" 
-                        pattern="[0-9]{6}" 
-                        placeholder="000000"
-                        required
-                        autocomplete="off">
-                </div>
-                <div id="otpError" class="error-message"></div>
-                <div id="otpSuccess" class="success-message" style="display: none;"></div>
-                <button type="submit" class="btn btn-primary" id="verifyBtn">
-                    <span id="verifyText">Verify Email</span>
-                    <span id="verifySpinner" style="display: none;">Verifying...</span>
-                </button>
-            </form>
-            <div class="resend-link">
-                Didn't receive the code? <a id="resendLink">Resend OTP</a>
-            </div>
-            <div class="auth-footer">
-                <a href="/register">← Back to Registration</a>
-            </div>
+            <div id="otpError" class="error-message"></div>
+            <div id="otpSuccess" class="success-message" style="display: none;"></div>
+            <button type="submit" class="btn btn-primary" id="verifyBtn">
+                <span id="verifyText">Verify Email</span>
+                <span id="verifySpinner" style="display: none;">Verifying...</span>
+            </button>
+        </form>
+        <div class="resend-link">
+            Didn't receive the code? <a id="resendLink">Resend OTP</a>
+        </div>
+        <div class="auth-footer">
+            <a href="/register">← Back to Registration</a>
         </div>
     </div>
-    <script src="/static/js/email_otp.js"></script>
-</body>
-</html>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/email_otp.js"></script>
+{% endblock %}

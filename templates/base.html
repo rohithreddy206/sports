@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sports Club{% endblock %}</title>
+    {% block styles %}
+    <link rel="stylesheet" href="/static/css/styles.css">
+    {% endblock %}
+    <link rel="stylesheet" href="/static/css/chatbot.css">
+    {% block extra_styles %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+
+    <!-- Global Chatbot Widget -->
+    <button id="chatbot-btn" class="chatbot-button" onclick="toggleChat()">
+        💬
+    </button>
+
+    <div id="chat-window" class="chat-window">
+        <div id="chat-header" class="chat-header">
+            <span>🏆 Sports Club Assistant</span>
+            <button onclick="toggleChat()" class="close-btn">✕</button>
+        </div>
+        <div id="chat-body" class="chat-body">
+            <div class="bot-message">
+                <p>Hi! I'm your Sports Club assistant. How can I help you today?</p>
+            </div>
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="chat-input" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()" class="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script src="/static/js/chatbot.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

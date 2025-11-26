@@ -6,6 +6,7 @@ from config.settings import SESSION_SECRET_KEY
 
 # Import routers
 from api import page_routes, auth_routes, otp_routes, phone_routes, totp_routes
+from api.ai_routes import router as ai_router
 
 # Create FastAPI app
 app = FastAPI(title="Sports Club Management System")
@@ -22,3 +23,4 @@ app.include_router(auth_routes.router, tags=["auth"])
 app.include_router(otp_routes.router, tags=["otp"])
 app.include_router(phone_routes.router, tags=["phone"])
 app.include_router(totp_routes.router, tags=["totp"])
+app.include_router(ai_router)
